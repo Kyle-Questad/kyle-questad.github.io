@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Kyle Questad | Cybersecurity</title>
 
+
     <style>
+
+        /* =========================================
+           GLOBAL
+        ========================================= */
+
         * {
             box-sizing: border-box;
         }
@@ -16,73 +28,264 @@
         }
 
         body {
+
             margin: 0;
-            background: #050505;
+
+            background:
+                radial-gradient(
+                    circle at 50% 10%,
+                    #071b0b 0%,
+                    #020502 35%,
+                    #000000 70%
+                );
+
             color: #00ff41;
-            font-family: "Courier New", Courier, monospace;
-            line-height: 1.6;
+
+            font-family:
+                "Courier New",
+                Courier,
+                monospace;
+
+            line-height: 1.7;
         }
+
 
         a {
+
             color: #00ff41;
+
             text-decoration: none;
+
+            transition: 0.2s;
         }
+
 
         a:hover {
-            color: white;
+
+            color: #ffffff;
+
+            text-shadow:
+                0 0 8px #00ff41;
         }
 
+
         button {
+
             font-family: inherit;
         }
 
-        /* =========================
-           TERMINAL HEADER
-        ========================= */
+
+        /* =========================================
+           BOOT SCREEN
+        ========================================= */
+
+        #boot-screen {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            background: #000000;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px;
+        }
+
+
+        .boot-terminal {
+
+            width: 100%;
+
+            max-width: 800px;
+
+            color: #00ff41;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+        }
+
+
+        .boot-line {
+
+            opacity: 0;
+
+            animation:
+                bootAppear
+                0.3s
+                forwards;
+        }
+
+
+        .boot-cyan {
+
+            color: #00e5ff;
+        }
+
+
+        .boot-yellow {
+
+            color: #ffd166;
+        }
+
+
+        .boot-progress {
+
+            margin-top: 20px;
+
+            width: 100%;
+
+            height: 8px;
+
+            border: 1px solid #006b1b;
+        }
+
+
+        .boot-progress-bar {
+
+            width: 0%;
+
+            height: 100%;
+
+            background: #00ff41;
+
+            animation:
+                bootProgress
+                2.7s
+                forwards;
+        }
+
+
+        @keyframes bootAppear {
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        @keyframes bootProgress {
+
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 100%;
+            }
+
+        }
+
+
+        /* =========================================
+           MAIN SITE
+        ========================================= */
+
+        #site {
+
+            opacity: 0;
+
+            transition:
+                opacity
+                0.8s
+                ease;
+        }
+
+
+        #site.loaded {
+
+            opacity: 1;
+        }
+
+
+        /* =========================================
+           TOP TERMINAL BAR
+        ========================================= */
 
         .terminal-bar {
+
             position: sticky;
+
             top: 0;
+
             z-index: 1000;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             padding: 12px 25px;
 
-            background: #080808;
-            border-bottom: 1px solid #00ff41;
+            background:
+                rgba(0, 0, 0, 0.92);
+
+            border-bottom:
+                1px solid #006b1b;
+
+            backdrop-filter:
+                blur(8px);
         }
+
 
         .terminal-title {
+
             font-size: 14px;
+
+            color: #00ff41;
         }
+
 
         .terminal-status {
-            font-size: 13px;
+
+            font-size: 12px;
+
+            color: #00e5ff;
         }
 
+
         .status-dot {
+
             display: inline-block;
+
             width: 8px;
+
             height: 8px;
+
             margin-right: 6px;
 
             background: #00ff41;
+
             border-radius: 50%;
+
+            box-shadow:
+                0 0 8px #00ff41;
         }
 
-        /* =========================
+
+        /* =========================================
            HERO
-        ========================= */
+        ========================================= */
 
         .hero {
+
             min-height: 90vh;
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             justify-content: center;
 
             text-align: center;
@@ -90,176 +293,355 @@
             padding: 80px 20px;
         }
 
+
         .headshot {
+
             width: 180px;
+
             height: 180px;
 
             object-fit: cover;
 
-            border: 2px solid #00ff41;
+            border:
+                2px solid #00ff41;
+
             border-radius: 50%;
 
             margin-bottom: 30px;
 
-            box-shadow: 0 0 25px rgba(0, 255, 65, 0.25);
+            box-shadow:
+                0 0 15px rgba(0,255,65,.25),
+                0 0 45px rgba(0,255,65,.08);
         }
 
+
+        .headshot-fallback {
+
+            width: 180px;
+
+            height: 180px;
+
+            border:
+                2px solid #00ff41;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 42px;
+
+            font-weight: bold;
+
+            margin-bottom: 30px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #0b250f,
+                    #020502
+                );
+
+            box-shadow:
+                0 0 20px rgba(0,255,65,.2);
+        }
+
+
         .prompt {
+
+            color: #00e5ff;
+
             font-size: 16px;
+
             margin-bottom: 10px;
         }
 
+
         .hero h1 {
+
             margin: 0;
 
-            font-size: clamp(38px, 7vw, 72px);
+            font-size:
+                clamp(38px, 7vw, 72px);
+
             letter-spacing: 5px;
 
             color: #00ff41;
+
+            text-shadow:
+                0 0 12px rgba(0,255,65,.25);
         }
+
 
         .hero h2 {
-            margin: 10px 0 20px;
 
-            font-size: clamp(18px, 3vw, 28px);
+            margin:
+                10px 0 20px;
+
+            font-size:
+                clamp(18px, 3vw, 28px);
+
             font-weight: normal;
 
-            color: #b8ffca;
+            color: #00e5ff;
         }
 
-        .hero-description {
-            max-width: 700px;
 
-            color: #a8a8a8;
+        .hero-description {
+
+            max-width: 750px;
+
+            color: #bcbcbc;
+
             font-size: 16px;
         }
 
+
         .cert-line {
+
             margin-top: 20px;
 
-            color: #00ff41;
+            color: #ffd166;
+
             font-size: 14px;
         }
 
-        /* =========================
+
+        /* =========================================
            NAVIGATION
-        ========================= */
+        ========================================= */
 
         .nav {
+
             display: flex;
+
             flex-wrap: wrap;
+
             justify-content: center;
 
             gap: 10px;
 
-            margin-top: 35px;
+            margin-top: 40px;
         }
 
-        .nav button {
-            padding: 10px 14px;
 
-            background: transparent;
+        .nav button {
+
+            padding:
+                10px 14px;
+
+            background:
+                rgba(0,255,65,.02);
+
             color: #00ff41;
 
-            border: 1px solid #006b1b;
+            border:
+                1px solid #006b1b;
 
             cursor: pointer;
 
-            transition: 0.2s;
+            transition: .2s;
         }
+
 
         .nav button:hover,
         .nav button.active {
+
             background: #00ff41;
-            color: #050505;
+
+            color: #000;
 
             border-color: #00ff41;
+
+            box-shadow:
+                0 0 12px
+                rgba(0,255,65,.3);
         }
 
-        /* =========================
-           MAIN CONTENT
-        ========================= */
+
+        /* =========================================
+           MAIN
+        ========================================= */
 
         main {
-            max-width: 1000px;
+
+            width: 100%;
+
+            max-width: 1050px;
+
             margin: auto;
 
-            padding: 0 25px 100px;
+            padding:
+                0 25px
+                100px;
         }
+
 
         .section {
-            margin-bottom: 100px;
-            scroll-margin-top: 80px;
+
+            margin-bottom: 110px;
+
+            scroll-margin-top: 90px;
         }
+
+
+        /* =========================================
+           SECTION TITLES
+        ========================================= */
 
         .section-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
 
-            margin-bottom: 25px;
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 30px;
 
             font-size: 26px;
+
+            color: #00ff41;
         }
 
+
+        .section-number {
+
+            color: #00e5ff;
+
+            font-size: 14px;
+
+            border:
+                1px solid #00e5ff;
+
+            padding:
+                2px 7px;
+        }
+
+
         .section-title::after {
+
             content: "";
 
             flex: 1;
 
             height: 1px;
 
-            background: #003b10;
+            background:
+                linear-gradient(
+                    to right,
+                    #006b1b,
+                    transparent
+                );
         }
 
-        /* =========================
+
+        /* =========================================
            ABOUT
-        ========================= */
+        ========================================= */
 
         .about-box {
+
             padding: 30px;
 
-            border: 1px solid #006b1b;
+            border:
+                1px solid #006b1b;
 
-            background: rgba(0, 255, 65, 0.02);
+            border-left:
+                3px solid #00ff41;
+
+            background:
+                rgba(0,255,65,.025);
+
+            box-shadow:
+                inset 0 0 25px
+                rgba(0,255,65,.02);
         }
 
+
         .about-box p {
+
             color: #c8c8c8;
         }
 
+
         .highlight {
+
             color: #00ff41;
+
+            font-weight: bold;
         }
 
-        /* =========================
-           INTERACTIVE CARDS
-        ========================= */
+
+        .cyan {
+
+            color: #00e5ff;
+        }
+
+
+        .yellow {
+
+            color: #ffd166;
+        }
+
+
+        /* =========================================
+           CARDS
+        ========================================= */
 
         .card {
+
             margin-bottom: 15px;
 
-            border: 1px solid #006b1b;
+            border:
+                1px solid #064d17;
 
-            background: #080808;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,255,65,.025),
+                    rgba(0,0,0,.4)
+                );
 
-            transition: 0.2s;
+            transition:
+                .25s ease;
         }
+
 
         .card:hover {
-            border-color: #00ff41;
+
+            border-color:
+                #00ff41;
+
+            transform:
+                translateX(3px);
+
+            box-shadow:
+                -3px 0 15px
+                rgba(0,255,65,.08);
         }
 
+
         .card-button {
+
             width: 100%;
 
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
 
             padding: 20px;
 
-            background: transparent;
+            background:
+                transparent;
+
             color: #00ff41;
 
             border: none;
@@ -271,196 +653,534 @@
             font-size: 16px;
         }
 
+
         .card-button:hover {
-            background: rgba(0, 255, 65, 0.05);
+
+            background:
+                rgba(0,255,65,.04);
         }
 
-        .arrow {
-            transition: transform 0.2s;
+
+        .card-title {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 3px;
         }
 
-        .card.open .arrow {
-            transform: rotate(90deg);
-        }
 
-        .card-content {
-            display: none;
+        .card-subtitle {
 
-            padding: 0 25px 25px;
-
-            color: #bdbdbd;
-        }
-
-        .card.open .card-content {
-            display: block;
-        }
-
-        .tag {
-            display: inline-block;
-
-            padding: 4px 8px;
-            margin: 4px;
-
-            border: 1px solid #006b1b;
+            color: #00e5ff;
 
             font-size: 12px;
-            color: #00ff41;
         }
 
-        /* =========================
-           SKILLS
-        ========================= */
+
+        .arrow {
+
+            color: #ffd166;
+
+            transition:
+                transform .2s;
+        }
+
+
+        .card.open .arrow {
+
+            transform:
+                rotate(90deg);
+        }
+
+
+        .card-content {
+
+            display: none;
+
+            padding:
+                0 25px 25px;
+
+            color: #bdbdbd;
+
+            border-top:
+                1px solid #063b13;
+        }
+
+
+        .card.open .card-content {
+
+            display: block;
+
+            animation:
+                reveal
+                .25s
+                ease;
+        }
+
+
+        @keyframes reveal {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(-5px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =========================================
+           EXPERIENCE TIMELINE
+        ========================================= */
+
+        .experience-item {
+
+            position: relative;
+
+            padding-left: 30px;
+        }
+
+
+        .experience-item::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 7px;
+
+            top: 0;
+
+            bottom: -15px;
+
+            width: 1px;
+
+            background:
+                #006b1b;
+        }
+
+
+        .experience-item::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 3px;
+
+            top: 22px;
+
+            width: 9px;
+
+            height: 9px;
+
+            background:
+                #00ff41;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 10px
+                rgba(0,255,65,.6);
+        }
+
+
+        .experience-item:last-child::before {
+
+            bottom: 50%;
+        }
+
+
+        /* =========================================
+           TAGS
+        ========================================= */
 
         .skills {
+
             display: flex;
+
             flex-wrap: wrap;
+
             gap: 8px;
         }
 
-        /* =========================
-           TERMINAL COMMAND
-        ========================= */
 
-        .command-box {
-            margin-top: 40px;
+        .tag {
 
-            padding: 20px;
+            display: inline-block;
 
-            border: 1px solid #006b1b;
+            padding:
+                5px 9px;
 
-            background: #020202;
+            margin:
+                4px 3px;
+
+            border:
+                1px solid #006b1b;
+
+            color: #00ff41;
+
+            background:
+                rgba(0,255,65,.025);
+
+            font-size: 11px;
+
+            transition: .2s;
         }
 
+
+        .tag:hover {
+
+            border-color:
+                #00e5ff;
+
+            color:
+                #00e5ff;
+        }
+
+
+        /* =========================================
+           PROJECTS
+        ========================================= */
+
+        .project-card {
+
+            border-left:
+                3px solid #00e5ff;
+        }
+
+
+        .project-card:hover {
+
+            border-left-color:
+                #00ff41;
+        }
+
+
+        /* =========================================
+           TERMINAL BOX
+        ========================================= */
+
+        .command-box {
+
+            margin-top: 50px;
+
+            padding: 25px;
+
+            border:
+                1px solid #006b1b;
+
+            background:
+                #010301;
+
+            color: #aaa;
+        }
+
+
         .command-line {
+
             color: #00ff41;
         }
 
+
         .cursor {
+
             display: inline-block;
 
             width: 8px;
+
             height: 17px;
 
             margin-left: 3px;
 
-            background: #00ff41;
+            background:
+                #00ff41;
 
-            animation: blink 1s infinite;
+            animation:
+                blink
+                1s
+                infinite;
         }
 
+
         @keyframes blink {
+
             50% {
                 opacity: 0;
             }
         }
 
-        /* =========================
+
+        /* =========================================
            FOOTER
-        ========================= */
+        ========================================= */
 
         footer {
-            padding: 50px 20px;
+
+            padding:
+                50px 20px;
 
             text-align: center;
 
-            border-top: 1px solid #003b10;
+            border-top:
+                1px solid #003b10;
 
             color: #666;
         }
 
+
         footer span {
+
             color: #00ff41;
         }
 
-        /* =========================
+
+        /* =========================================
            MOBILE
-        ========================= */
+        ========================================= */
 
         @media (max-width: 600px) {
 
             .terminal-status {
+
                 display: none;
             }
 
+
             .hero {
-                padding-top: 60px;
+
+                padding:
+                    60px 15px;
             }
 
-            .headshot {
+
+            .headshot,
+            .headshot-fallback {
+
                 width: 140px;
+
                 height: 140px;
             }
 
+
             .hero h1 {
-                letter-spacing: 2px;
+
+                letter-spacing:
+                    2px;
             }
+
 
             .nav {
-                flex-direction: column;
+
+                flex-direction:
+                    column;
+
                 width: 100%;
-                max-width: 350px;
+
+                max-width:
+                    350px;
             }
+
 
             .nav button {
+
                 width: 100%;
             }
 
+
             main {
-                padding: 0 15px 60px;
+
+                padding:
+                    0 15px
+                    60px;
             }
+
+
+            .section {
+
+                margin-bottom:
+                    80px;
+            }
+
         }
+
     </style>
+
 </head>
 
 
 <body>
+
+
+<!-- =========================================
+     BOOT SCREEN
+========================================= -->
+
+<div id="boot-screen">
+
+    <div class="boot-terminal">
+
+        <div class="boot-line" style="animation-delay:.1s">
+            > initializing Kyle-Questad@portfolio...
+        </div>
+
+        <div
+            class="boot-line boot-cyan"
+            style="animation-delay:.4s"
+        >
+            > loading security modules...
+        </div>
+
+        <div
+            class="boot-line"
+            style="animation-delay:.7s"
+        >
+            > loading certifications...
+        </div>
+
+        <div
+            class="boot-line boot-yellow"
+            style="animation-delay:1s"
+        >
+            > loading professional experience...
+        </div>
+
+        <div
+            class="boot-line"
+            style="animation-delay:1.3s"
+        >
+            > loading cybersecurity projects...
+        </div>
+
+        <div
+            class="boot-line boot-cyan"
+            style="animation-delay:1.6s"
+        >
+            > establishing secure connection...
+        </div>
+
+        <div
+            class="boot-line"
+            style="animation-delay:1.9s"
+        >
+            > system ready.
+        </div>
+
+
+        <div class="boot-progress">
+
+            <div class="boot-progress-bar"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     WEBSITE
+========================================= -->
+
+<div id="site">
+
 
     <!-- TERMINAL BAR -->
 
     <div class="terminal-bar">
 
         <div class="terminal-title">
+
             Kyle-Questad@portfolio:~$
+
         </div>
 
+
         <div class="terminal-status">
+
             <span class="status-dot"></span>
+
             SYSTEM ONLINE
+
         </div>
 
     </div>
 
 
-    <!-- HERO -->
+    <!-- =====================================
+         HERO
+    ====================================== -->
 
-    <header class="hero" id="home">
+    <header
+        class="hero"
+        id="home"
+    >
 
-        <img
-            src="images/headshot.jpg"
-            alt="Kyle Questad"
-            class="headshot"
-            onerror="this.style.display='none';"
-        >
 
-        <div class="prompt">
-            > whoami
+        <div class="headshot-fallback">
+
+            KQ
+
         </div>
 
-        <h1>KYLE QUESTAD</h1>
 
-        <h2>CYBERSECURITY ANALYST</h2>
+        <div class="prompt">
+
+            > whoami
+
+        </div>
+
+
+        <h1>
+
+            KYLE QUESTAD
+
+        </h1>
+
+
+        <h2>
+
+            CYBERSECURITY ANALYST
+
+        </h2>
+
 
         <p class="hero-description">
-            Incident Response | Security Operations |
-            Cloud Security | Security Engineering
+
+            Incident Response
+            |
+            Security Operations
+            |
+            Cloud Security
+            |
+            Security Engineering
+
         </p>
+
 
         <p class="cert-line">
-            Security+ | CySA+ | AZ-900
+
+            Security+
+            |
+            CySA+
+            |
+            AZ-900
+
         </p>
 
 
-        <!-- INTERACTIVE NAV -->
+        <!-- NAV -->
 
         <nav class="nav">
 
@@ -468,12 +1188,12 @@
                 [ ABOUT ]
             </button>
 
-            <button data-target="certifications">
-                [ CERTIFICATIONS ]
-            </button>
-
             <button data-target="experience">
                 [ EXPERIENCE ]
+            </button>
+
+            <button data-target="certifications">
+                [ CERTIFICATIONS ]
             </button>
 
             <button data-target="projects">
@@ -482,6 +1202,10 @@
 
             <button data-target="education">
                 [ EDUCATION ]
+            </button>
+
+            <button data-target="skills">
+                [ SKILLS ]
             </button>
 
             <button data-target="contact">
@@ -493,36 +1217,65 @@
     </header>
 
 
+    <!-- =====================================
+         MAIN
+    ====================================== -->
+
     <main>
 
 
         <!-- ABOUT -->
 
-        <section class="section" id="about">
+        <section
+            class="section"
+            id="about"
+        >
 
             <h2 class="section-title">
+
+                <span class="section-number">
+                    01
+                </span>
+
                 > about
+
             </h2>
+
 
             <div class="about-box">
 
                 <p>
+
                     I'm a cybersecurity student focused on
-                    <span class="highlight">incident response</span>,
-                    security operations, cloud security, and
-                    security engineering.
+                    <span class="highlight">
+                        incident response
+                    </span>,
+                    security operations, cloud security,
+                    and security engineering.
+
                 </p>
 
+
                 <p>
+
                     I'm building hands-on experience through
                     cybersecurity projects, security operations,
                     IT support, and cloud security labs.
+
                 </p>
+
 
                 <p>
-                    My goal is to continue developing from
-                    security operations and incident response
-                    into security engineering.
+
+                    My long-term focus is developing from
+                    <span class="cyan">
+                        security operations and incident response
+                    </span>
+                    into
+                    <span class="highlight">
+                        security engineering
+                    </span>.
+
                 </p>
 
             </div>
@@ -530,182 +1283,146 @@
         </section>
 
 
-        <!-- CERTIFICATIONS -->
+        <!-- =================================
+             EXPERIENCE
+        ================================== -->
 
-        <section class="section" id="certifications">
-
-            <h2 class="section-title">
-                > certifications
-            </h2>
-
-
-            <div class="card">
-
-                <button class="card-button">
-
-                    <span>
-                        [+] CompTIA Security+
-                    </span>
-
-                    <span class="arrow">
-                        >
-                    </span>
-
-                </button>
-
-                <div class="card-content">
-
-                    <p>
-                        CompTIA Security+ certification focused on
-                        foundational cybersecurity concepts,
-                        security operations, networking, and
-                        risk management.
-                    </p>
-
-                    <span class="tag">SECURITY OPERATIONS</span>
-                    <span class="tag">NETWORKING</span>
-                    <span class="tag">RISK</span>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <button class="card-button">
-
-                    <span>
-                        [+] CompTIA CySA+
-                    </span>
-
-                    <span class="arrow">
-                        >
-                    </span>
-
-                </button>
-
-                <div class="card-content">
-
-                    <p>
-                        Cybersecurity Analyst certification focused
-                        on threat detection, vulnerability management,
-                        incident response, and security monitoring.
-                    </p>
-
-                    <span class="tag">THREAT DETECTION</span>
-                    <span class="tag">INCIDENT RESPONSE</span>
-                    <span class="tag">VULNERABILITY MANAGEMENT</span>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <button class="card-button">
-
-                    <span>
-                        [+] Microsoft AZ-900
-                    </span>
-
-                    <span class="arrow">
-                        >
-                    </span>
-
-                </button>
-
-                <div class="card-content">
-
-                    <p>
-                        Microsoft Azure Fundamentals certification
-                        covering cloud concepts, Azure services,
-                        security, compliance, and cloud management.
-                    </p>
-
-                    <span class="tag">AZURE</span>
-                    <span class="tag">CLOUD</span>
-                    <span class="tag">SECURITY</span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- EXPERIENCE -->
-
-        <section class="section" id="experience">
+        <section
+            class="section"
+            id="experience"
+        >
 
             <h2 class="section-title">
+
+                <span class="section-number">
+                    02
+                </span>
+
                 > experience
+
             </h2>
 
 
-            <div class="card">
+            <div class="experience-item">
 
-                <button class="card-button">
+                <div class="card">
 
-                    <span>
-                        [+] Junior Security Analyst — RunBuggy
-                    </span>
+                    <button class="card-button">
 
-                    <span class="arrow">></span>
+                        <div class="card-title">
 
-                </button>
+                            <strong>
+                                Junior Security Analyst — RunBuggy
+                            </strong>
 
-                <div class="card-content">
+                            <span class="card-subtitle">
+                                INCIDENT RESPONSE | SECURITY OPERATIONS
+                            </span>
 
-                    <p>
-                        Incident Response | Security Operations
-                    </p>
+                        </div>
 
-                    <p>
-                        Investigating security alerts, suspicious
-                        authentication activity, phishing reports,
-                        impossible-travel alerts, IP reputation,
-                        and security tickets.
-                    </p>
+                        <span class="arrow">
+                            >
+                        </span>
 
-                    <span class="tag">INCIDENT RESPONSE</span>
-                    <span class="tag">ALERT TRIAGE</span>
-                    <span class="tag">PHISHING</span>
-                    <span class="tag">AUTHENTICATION</span>
+                    </button>
+
+
+                    <div class="card-content">
+
+                        <p>
+
+                            Investigating security alerts,
+                            suspicious authentication activity,
+                            phishing reports, impossible-travel
+                            alerts, IP reputation, and security
+                            tickets.
+
+                        </p>
+
+
+                        <span class="tag">
+                            INCIDENT RESPONSE
+                        </span>
+
+                        <span class="tag">
+                            ALERT TRIAGE
+                        </span>
+
+                        <span class="tag">
+                            PHISHING
+                        </span>
+
+                        <span class="tag">
+                            AUTHENTICATION
+                        </span>
+
+                        <span class="tag">
+                            SECURITY OPERATIONS
+                        </span>
+
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <div class="card">
+            <div class="experience-item">
 
-                <button class="card-button">
+                <div class="card">
 
-                    <span>
-                        [+] IT Support Analyst — GCE
-                    </span>
+                    <button class="card-button">
 
-                    <span class="arrow">></span>
+                        <div class="card-title">
 
-                </button>
+                            <strong>
+                                IT Support Analyst — GCE
+                            </strong>
 
-                <div class="card-content">
+                            <span class="card-subtitle">
+                                IT SUPPORT | SERVICE MANAGEMENT
+                            </span>
 
-                    <p>
-                        IT Support | ServiceNow | Active Directory
-                    </p>
+                        </div>
 
-                    <p>
-                        Supporting users with account administration,
-                        password resets, troubleshooting, hardware,
-                        software, printers, and ticket management.
-                    </p>
+                        <span class="arrow">
+                            >
+                        </span>
 
-                    <span class="tag">SERVICENOW</span>
-                    <span class="tag">ACTIVE DIRECTORY</span>
-                    <span class="tag">TROUBLESHOOTING</span>
+                    </button>
+
+
+                    <div class="card-content">
+
+                        <p>
+
+                            Supporting users with account
+                            administration, password resets,
+                            troubleshooting, hardware,
+                            software, printers, and ticket
+                            management.
+
+                        </p>
+
+
+                        <span class="tag">
+                            SERVICENOW
+                        </span>
+
+                        <span class="tag">
+                            ACTIVE DIRECTORY
+                        </span>
+
+                        <span class="tag">
+                            TROUBLESHOOTING
+                        </span>
+
+                        <span class="tag">
+                            ACCOUNT ADMINISTRATION
+                        </span>
+
+                    </div>
 
                 </div>
 
@@ -714,12 +1431,23 @@
         </section>
 
 
-        <!-- PROJECTS -->
+        <!-- =================================
+             CERTIFICATIONS
+        ================================== -->
 
-        <section class="section" id="projects">
+        <section
+            class="section"
+            id="certifications"
+        >
 
             <h2 class="section-title">
-                > projects
+
+                <span class="section-number">
+                    03
+                </span>
+
+                > certifications
+
             </h2>
 
 
@@ -727,84 +1455,318 @@
 
                 <button class="card-button">
 
-                    <span>
-                        [+] Azure SOC Homelab
+                    <div class="card-title">
+
+                        <strong>
+                            [+] CompTIA Security+
+                        </strong>
+
+                        <span class="card-subtitle">
+                            SECURITY FUNDAMENTALS
+                        </span>
+
+                    </div>
+
+                    <span class="arrow">
+                        >
                     </span>
 
-                    <span class="arrow">></span>
-
                 </button>
+
 
                 <div class="card-content">
 
                     <p>
+
+                        CompTIA Security+ certification
+                        covering cybersecurity fundamentals,
+                        security operations, networking,
+                        threats, and risk management.
+
+                    </p>
+
+
+                    <span class="tag">
+                        SECURITY OPERATIONS
+                    </span>
+
+                    <span class="tag">
+                        NETWORKING
+                    </span>
+
+                    <span class="tag">
+                        RISK
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <button class="card-button">
+
+                    <div class="card-title">
+
+                        <strong>
+                            [+] CompTIA CySA+
+                        </strong>
+
+                        <span class="card-subtitle">
+                            CYBERSECURITY ANALYTICS
+                        </span>
+
+                    </div>
+
+                    <span class="arrow">
+                        >
+                    </span>
+
+                </button>
+
+
+                <div class="card-content">
+
+                    <p>
+
+                        Cybersecurity Analyst certification
+                        focused on threat detection,
+                        vulnerability management,
+                        incident response, and security
+                        monitoring.
+
+                    </p>
+
+
+                    <span class="tag">
+                        THREAT DETECTION
+                    </span>
+
+                    <span class="tag">
+                        INCIDENT RESPONSE
+                    </span>
+
+                    <span class="tag">
+                        VULNERABILITY MANAGEMENT
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <button class="card-button">
+
+                    <div class="card-title">
+
+                        <strong>
+                            [+] Microsoft AZ-900
+                        </strong>
+
+                        <span class="card-subtitle">
+                            AZURE FUNDAMENTALS
+                        </span>
+
+                    </div>
+
+                    <span class="arrow">
+                        >
+                    </span>
+
+                </button>
+
+
+                <div class="card-content">
+
+                    <p>
+
+                        Microsoft Azure Fundamentals
+                        certification covering cloud
+                        concepts, Azure services,
+                        security, compliance, and
+                        cloud management.
+
+                    </p>
+
+
+                    <span class="tag">
+                        AZURE
+                    </span>
+
+                    <span class="tag">
+                        CLOUD
+                    </span>
+
+                    <span class="tag">
+                        SECURITY
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             PROJECTS
+        ================================== -->
+
+        <section
+            class="section"
+            id="projects"
+        >
+
+            <h2 class="section-title">
+
+                <span class="section-number">
+                    04
+                </span>
+
+                > projects
+
+            </h2>
+
+
+            <div class="card project-card">
+
+                <button class="card-button">
+
+                    <div class="card-title">
+
+                        <strong>
+                            [+] Azure SOC Homelab
+                        </strong>
+
+                        <span class="card-subtitle">
+                            AZURE | SENTINEL | KQL
+                        </span>
+
+                    </div>
+
+                    <span class="arrow">
+                        >
+                    </span>
+
+                </button>
+
+
+                <div class="card-content">
+
+                    <p>
+
                         Built a cloud-based security monitoring
                         environment using Microsoft Azure and
                         Microsoft Sentinel.
+
                     </p>
 
-                    <div class="skills">
 
-                        <span class="tag">AZURE</span>
-                        <span class="tag">SENTINEL</span>
-                        <span class="tag">KQL</span>
-                        <span class="tag">LOG ANALYTICS</span>
-                        <span class="tag">NSG</span>
-                        <span class="tag">DCR</span>
+                    <span class="tag">
+                        AZURE
+                    </span>
 
-                    </div>
+                    <span class="tag">
+                        SENTINEL
+                    </span>
 
-                    <br>
+                    <span class="tag">
+                        KQL
+                    </span>
 
-                    <a
-                        href="https://github.com/Kyle-Questad/Azure-SOC-Homelab"
-                        target="_blank"
-                    >
-                        [ VIEW GITHUB PROJECT ]
-                    </a>
+                    <span class="tag">
+                        LOG ANALYTICS
+                    </span>
+
+                    <span class="tag">
+                        NSG
+                    </span>
+
+                    <span class="tag">
+                        DCR
+                    </span>
+
+
+                    <p>
+
+                        <a
+                            href="https://github.com/Kyle-Questad/Azure-SOC-Homelab"
+                            target="_blank"
+                        >
+                            [ VIEW GITHUB PROJECT ]
+                        </a>
+
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <div class="card">
+            <div class="card project-card">
 
                 <button class="card-button">
 
-                    <span>
-                        [+] Security Automation
+                    <div class="card-title">
+
+                        <strong>
+                            [+] Security Automation
+                        </strong>
+
+                        <span class="card-subtitle">
+                            PYTHON | APIs | AUTOMATION
+                        </span>
+
+                    </div>
+
+                    <span class="arrow">
+                        >
                     </span>
 
-                    <span class="arrow">></span>
-
                 </button>
+
 
                 <div class="card-content">
 
                     <p>
-                        Security automation projects focused on
-                        reducing repetitive SOC tasks and improving
-                        investigation workflows.
+
+                        Security automation projects focused
+                        on reducing repetitive SOC tasks and
+                        improving investigation workflows.
+
                     </p>
 
-                    <div class="skills">
 
-                        <span class="tag">PYTHON</span>
-                        <span class="tag">APIs</span>
-                        <span class="tag">AUTOMATION</span>
-                        <span class="tag">SECURITY</span>
+                    <span class="tag">
+                        PYTHON
+                    </span>
 
-                    </div>
+                    <span class="tag">
+                        APIs
+                    </span>
 
-                    <br>
+                    <span class="tag">
+                        AUTOMATION
+                    </span>
 
-                    <a
-                        href="https://github.com/Kyle-Questad"
-                        target="_blank"
-                    >
-                        [ VIEW GITHUB ]
-                    </a>
+                    <span class="tag">
+                        SECURITY
+                    </span>
+
+
+                    <p>
+
+                        <a
+                            href="https://github.com/Kyle-Questad"
+                            target="_blank"
+                        >
+                            [ VIEW GITHUB ]
+                        </a>
+
+                    </p>
 
                 </div>
 
@@ -813,25 +1775,48 @@
         </section>
 
 
-        <!-- EDUCATION -->
+        <!-- =================================
+             EDUCATION
+        ================================== -->
 
-        <section class="section" id="education">
+        <section
+            class="section"
+            id="education"
+        >
 
             <h2 class="section-title">
+
+                <span class="section-number">
+                    05
+                </span>
+
                 > education
+
             </h2>
+
 
             <div class="card">
 
                 <button class="card-button">
 
-                    <span>
-                        [+] Grand Canyon University
+                    <div class="card-title">
+
+                        <strong>
+                            [+] Grand Canyon University
+                        </strong>
+
+                        <span class="card-subtitle">
+                            B.S. BUSINESS INFORMATION SYSTEMS
+                        </span>
+
+                    </div>
+
+                    <span class="arrow">
+                        >
                     </span>
 
-                    <span class="arrow">></span>
-
                 </button>
+
 
                 <div class="card-content">
 
@@ -844,11 +1829,19 @@
                     </p>
 
                     <p>
-                        Expected Graduation: 2027
+                        Expected Graduation:
+                        <span class="yellow">
+                            2027
+                        </span>
                     </p>
 
-                    <span class="tag">CYBERSECURITY</span>
-                    <span class="tag">INFORMATION SYSTEMS</span>
+                    <span class="tag">
+                        INFORMATION SYSTEMS
+                    </span>
+
+                    <span class="tag">
+                        CYBERSECURITY
+                    </span>
 
                 </div>
 
@@ -857,71 +1850,140 @@
         </section>
 
 
-        <!-- SKILLS -->
+        <!-- =================================
+             SKILLS
+        ================================== -->
 
-        <section class="section" id="skills">
+        <section
+            class="section"
+            id="skills"
+        >
 
             <h2 class="section-title">
+
+                <span class="section-number">
+                    06
+                </span>
+
                 > technical_skills
+
             </h2>
+
 
             <div class="skills">
 
-                <span class="tag">MICROSOFT SENTINEL</span>
-                <span class="tag">KQL</span>
-                <span class="tag">AZURE</span>
-                <span class="tag">PYTHON</span>
-                <span class="tag">LINUX</span>
-                <span class="tag">ACTIVE DIRECTORY</span>
-                <span class="tag">INCIDENT RESPONSE</span>
-                <span class="tag">SIEM</span>
-                <span class="tag">IAM</span>
-                <span class="tag">NETWORKING</span>
-                <span class="tag">SERVICE NOW</span>
+                <span class="tag">
+                    MICROSOFT SENTINEL
+                </span>
+
+                <span class="tag">
+                    KQL
+                </span>
+
+                <span class="tag">
+                    AZURE
+                </span>
+
+                <span class="tag">
+                    PYTHON
+                </span>
+
+                <span class="tag">
+                    LINUX
+                </span>
+
+                <span class="tag">
+                    ACTIVE DIRECTORY
+                </span>
+
+                <span class="tag">
+                    INCIDENT RESPONSE
+                </span>
+
+                <span class="tag">
+                    SIEM
+                </span>
+
+                <span class="tag">
+                    IAM
+                </span>
+
+                <span class="tag">
+                    NETWORKING
+                </span>
+
+                <span class="tag">
+                    SERVICENOW
+                </span>
 
             </div>
 
         </section>
 
 
-        <!-- CONTACT -->
+        <!-- =================================
+             CONTACT
+        ================================== -->
 
-        <section class="section" id="contact">
+        <section
+            class="section"
+            id="contact"
+        >
 
             <h2 class="section-title">
+
+                <span class="section-number">
+                    07
+                </span>
+
                 > contact
+
             </h2>
+
 
             <div class="about-box">
 
                 <p>
-                    > establish_connection
+
+                    <span class="cyan">
+                        > establish_connection
+                    </span>
+
                 </p>
 
+
                 <p>
+
                     <a
                         href="https://github.com/Kyle-Questad"
                         target="_blank"
                     >
                         [ GITHUB ]
                     </a>
+
                 </p>
 
+
                 <p>
+
                     <a
                         href="https://www.linkedin.com/"
                         target="_blank"
                     >
                         [ LINKEDIN ]
                     </a>
+
                 </p>
 
+
                 <p>
+
                     <a
                         href="mailto:YOUR-EMAIL@example.com"
                     >
                         [ EMAIL ]
                     </a>
+
                 </p>
 
             </div>
@@ -929,7 +1991,9 @@
         </section>
 
 
-        <!-- TERMINAL -->
+        <!-- =================================
+             TERMINAL
+        ================================== -->
 
         <div class="command-box">
 
@@ -939,118 +2003,220 @@
 
             <br>
 
-            <span>
-                Loading cybersecurity portfolio...
+            Loading cybersecurity portfolio...
+
+            <br>
+
+            Modules loaded:
+            <span class="highlight">
+                7
             </span>
 
             <br>
 
-            <span>
-                Status: <span class="highlight">ONLINE</span>
+            System status:
+            <span class="highlight">
+                ONLINE
             </span>
 
             <span class="cursor"></span>
 
         </div>
 
+
     </main>
 
 
+    <!-- FOOTER -->
+
     <footer>
 
-        <p>
-            Kyle Questad
-        </p>
+        Kyle Questad
 
-        <p>
-            <span>system.status = ONLINE</span>
-        </p>
+        <br>
 
-        <p>
-            © 2026
-        </p>
+        <span>
+            system.status = ONLINE
+        </span>
+
+        <br>
+
+        © 2026
 
     </footer>
 
-
-    <!-- INTERACTIVITY -->
-
-    <script>
-
-        /* =========================
-           CARD EXPANSION
-        ========================= */
-
-        const cards = document.querySelectorAll(".card");
-
-        cards.forEach(card => {
-
-            const button = card.querySelector(".card-button");
-
-            button.addEventListener("click", () => {
-
-                card.classList.toggle("open");
-
-            });
-
-        });
+</div>
 
 
-        /* =========================
-           NAVIGATION
-        ========================= */
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
 
-        const navButtons = document.querySelectorAll(".nav button");
+<script>
 
-        navButtons.forEach(button => {
 
-            button.addEventListener("click", () => {
+    /* ========================================
+       BOOT SEQUENCE
+    ======================================== */
 
-                const targetId = button.dataset.target;
+    setTimeout(() => {
 
-                const target = document.getElementById(targetId);
+        const bootScreen =
+            document.getElementById(
+                "boot-screen"
+            );
+
+        const site =
+            document.getElementById(
+                "site"
+            );
+
+
+        bootScreen.style.transition =
+            "opacity .7s ease";
+
+
+        bootScreen.style.opacity =
+            "0";
+
+
+        site.classList.add(
+            "loaded"
+        );
+
+
+        setTimeout(() => {
+
+            bootScreen.style.display =
+                "none";
+
+        }, 700);
+
+
+    }, 3200);
+
+
+
+    /* ========================================
+       CARD EXPANSION
+    ======================================== */
+
+    const cards =
+        document.querySelectorAll(
+            ".card"
+        );
+
+
+    cards.forEach(card => {
+
+        const button =
+            card.querySelector(
+                ".card-button"
+            );
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                card.classList.toggle(
+                    "open"
+                );
+
+            }
+        );
+
+    });
+
+
+
+    /* ========================================
+       NAVIGATION
+    ======================================== */
+
+    const navButtons =
+        document.querySelectorAll(
+            ".nav button"
+        );
+
+
+    navButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const targetId =
+                    button.dataset.target;
+
+
+                const target =
+                    document.getElementById(
+                        targetId
+                    );
+
 
                 if (target) {
 
                     target.scrollIntoView({
-                        behavior: "smooth"
+
+                        behavior:
+                            "smooth"
+
                     });
 
                 }
 
-            });
+            }
+        );
 
-        });
+    });
 
 
-        /* =========================
-           ACTIVE NAVIGATION
-        ========================= */
 
-        const sections = document.querySelectorAll(".section");
+    /* ========================================
+       ACTIVE NAVIGATION
+    ======================================== */
 
-        const observer = new IntersectionObserver(
+    const sections =
+        document.querySelectorAll(
+            ".section"
+        );
+
+
+    const observer =
+        new IntersectionObserver(
 
             entries => {
 
                 entries.forEach(entry => {
 
-                    if (entry.isIntersecting) {
+                    if (
+                        entry.isIntersecting
+                    ) {
 
-                        navButtons.forEach(button => {
+                        navButtons.forEach(
+                            button => {
 
-                            button.classList.remove("active");
+                                button.classList.remove(
+                                    "active"
+                                );
 
-                        });
+                            }
+                        );
+
 
                         const activeButton =
                             document.querySelector(
                                 `[data-target="${entry.target.id}"]`
                             );
 
+
                         if (activeButton) {
 
-                            activeButton.classList.add("active");
+                            activeButton.classList.add(
+                                "active"
+                            );
 
                         }
 
@@ -1066,13 +2232,19 @@
 
         );
 
-        sections.forEach(section => {
 
-            observer.observe(section);
+    sections.forEach(section => {
 
-        });
+        observer.observe(
+            section
+        );
 
-    </script>
+    });
+
+
+</script>
+
 
 </body>
+
 </html>
